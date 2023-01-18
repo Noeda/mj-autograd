@@ -88,12 +88,12 @@ impl<T: Real + Clone + One + std::ops::Neg<Output = T> + std::ops::Mul<Output = 
             }
         }
 
-        if self.first_momentum.is_empty() {
-            self.first_momentum = vec![T::zero(); nderivatives];
+        if self.first_momentum.len() < nderivatives {
+            self.first_momentum.resize(nderivatives, T::zero());
         }
 
-        if self.second_momentum.is_empty() {
-            self.second_momentum = vec![T::zero(); nderivatives];
+        if self.second_momentum.len() < nderivatives {
+            self.second_momentum.resize(nderivatives, T::zero());
         }
 
         for idx in 0..nderivatives {
