@@ -7,3 +7,11 @@ edition = "2021"
 
 [dependencies]
 num = "0.4"
+
+[dev-dependencies]
+criterion = "0.4"
+
+[[bench]]
+path = "src/benches/benchmark.rs"
+name = "benchmark"
+harness = false

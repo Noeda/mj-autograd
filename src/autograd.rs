@@ -26,6 +26,11 @@ impl<T: Clone> Tape<T> {
         self.ops.borrow_mut().clear();
     }
 
+    pub fn shrink_to_fit(&mut self) {
+        self.ops.borrow_mut().shrink_to_fit();
+    }
+
+    #[inline]
     fn add_reset(&self, v1: T) -> usize {
         let mut ops = self.ops.borrow_mut();
         let new_idx = ops.len();
@@ -38,6 +43,7 @@ impl<T: Clone> Tape<T> {
         new_idx
     }
 
+    #[inline]
     fn add_op(&self, op: Op<T>) -> usize {
         let mut ops = self.ops.borrow_mut();
         let new_idx = ops.len();
@@ -278,7 +284,6 @@ impl<T: Clone + Zero + One> Reverse<T> {
         }
         let tape = self.tape.as_ref().unwrap();
         let ops = tape.ops.borrow();
-
         let mut derivatives: Vec<T> = vec![T::zero(); ops.len()];
         derivatives[self.index] = T::one();
 
