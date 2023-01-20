@@ -77,6 +77,10 @@ impl<T: Real + Clone + One + std::ops::Neg<Output = T> + std::ops::Mul<Output = 
         let derivatives: &[T] = &derivatives.derivatives;
         let nderivatives = derivatives.len();
 
+        if nderivatives == 0 {
+            return;
+        }
+
         let mut param_indices: Vec<usize> = Vec::with_capacity(nparams);
 
         // Apply weight decay
